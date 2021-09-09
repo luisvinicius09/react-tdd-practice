@@ -45,8 +45,14 @@ describe('AppoimentsDayView', () => {
   let container;
   const today = new Date();
   const appoiments = [
-    { startsAt: today.setHours(12, 0) },
-    { startsAt: today.setHours(13, 0) },
+    {
+      startsAt: today.setHours(12, 0),
+      customer: { firstName: 'Ashley' },
+    },
+    {
+      startsAt: today.setHours(13, 0),
+      customer: { firstName: 'Ashley' },
+    },
   ];
 
   beforeEach(() => {
@@ -72,5 +78,17 @@ describe('AppoimentsDayView', () => {
     expect(container.querySelectorAll('li')).toHaveLength(2);
     expect(container.querySelectorAll('li')[0].textContent).toEqual('12:00');
     expect(container.querySelectorAll('li')[1].textContent).toEqual('13:00');
+  });
+
+  it('initially shows a message saying there are no appoiments today', () => {
+    render(<AppoimentsDayView appoiments={[]} />);
+    expect(container.textContent).toMatch(
+      'There are no appoiments scheduled for today.'
+    );
+  });
+
+  it('selects the first appoiment by default', () => {
+    render(<AppoimentsDayView appoiments={appoiments} />);
+    expect(container.textContent).toMatch('Ashley');
   });
 });
