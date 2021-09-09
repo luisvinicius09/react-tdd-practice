@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Appoiment } from '../src/Appoiment';
+import { Appoiment, AppoimentsDayView } from '../src/Appoiment';
 
 /*
  * Defines the test suite(set of tests):
@@ -39,4 +39,33 @@ describe('Appoiments', () => {
 
     expect(container.textContent).toMatch('Jordan');
   });
+});
+
+describe('AppoimentsDayView', () => {
+  let container;
+
+  beforeEach(() => {
+    container = document.createElement('div');
+  });
+
+  const render = (component) => ReactDOM.render(component, container);
+
+  it('renders a div with the right id', () => {
+    render(<AppoimentsDayView appoiments={[]} />);
+
+    expect(container.querySelector('div#appoimentsDayView')).not.toBeNull();
+  });
+
+  it('renders multiple appoiments in an ol element', () => {
+    const today = new Date();
+    const appoiments = [
+      { startsAt: today.setHours(12, 0) },
+      { startsAt: today.setHours(13, 0) },
+    ];
+
+    render(<AppoimentsDayView appoiments={appoiments} />);
+    expect(container.querySelector('ol')).not.toBeNull(); // Interesting, first check if the component is there, null or not
+  });
+
+
 });
