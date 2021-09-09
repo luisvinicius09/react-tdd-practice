@@ -43,6 +43,11 @@ describe('Appoiments', () => {
 
 describe('AppoimentsDayView', () => {
   let container;
+  const today = new Date();
+  const appoiments = [
+    { startsAt: today.setHours(12, 0) },
+    { startsAt: today.setHours(13, 0) },
+  ];
 
   beforeEach(() => {
     container = document.createElement('div');
@@ -57,15 +62,15 @@ describe('AppoimentsDayView', () => {
   });
 
   it('renders multiple appoiments in an ol element', () => {
-    const today = new Date();
-    const appoiments = [
-      { startsAt: today.setHours(12, 0) },
-      { startsAt: today.setHours(13, 0) },
-    ];
-
     render(<AppoimentsDayView appoiments={appoiments} />);
     expect(container.querySelector('ol')).not.toBeNull(); // Interesting, first check if the component is there, null or not
+    expect(container.querySelector('ol').children).toHaveLength(2); // Then check the length of it, by counting the childrens
   });
 
-
+  it('renders each appoiment in an li', () => {
+    render(<AppoimentsDayView appoiments={appoiments} />);
+    expect(container.querySelectorAll('li')).toHaveLength(2);
+    expect(container.querySelectorAll('li')[0].textContent).toEqual('12:00');
+    expect(container.querySelectorAll('li')[1].textContent).toEqual('13:00');
+  });
 });
