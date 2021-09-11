@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Appoiment, AppoimentsDayView } from '../src/Appoiment';
+import ReactTestUtils from 'react-dom/test-utils';
 
 /*
  * Defines the test suite(set of tests):
@@ -51,7 +52,7 @@ describe('AppoimentsDayView', () => {
     },
     {
       startsAt: today.setHours(13, 0),
-      customer: { firstName: 'Ashley' },
+      customer: { firstName: 'Jordan' },
     },
   ];
 
@@ -90,5 +91,18 @@ describe('AppoimentsDayView', () => {
   it('selects the first appoiment by default', () => {
     render(<AppoimentsDayView appoiments={appoiments} />);
     expect(container.textContent).toMatch('Ashley');
+  });
+
+  it('has a button in each li', () => {
+    render(<AppoimentsDayView appoiments={appoiments} />);
+    expect(container.querySelectorAll('li > button')).toHaveLength(2);
+    expect(container.querySelectorAll('li > button')[0].type).toEqual('button');
+  });
+
+  it('renders another appoiment when selected', () => {
+    render(<AppoimentsDayView appoiments={appoiments} />);
+    const button = container.querySelectorAll('button')[1];
+    ReactTestUtils.Simulate.click(button);
+    expect(container.textContent).toMatch('Jordan');
   });
 });
