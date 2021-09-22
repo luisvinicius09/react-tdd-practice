@@ -39,7 +39,6 @@ export const Appoiment = ({
         <td>{notes}</td>
       </tr>
     </table>
-    <div>{firstName}</div>
   </>
 );
 
