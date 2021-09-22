@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Appoiment, AppoimentsDayView } from '../src/Appoiment';
+import { Appoiment, AppoimentsDayView } from '../src/AppoimentsDayView.test';
 import ReactTestUtils from 'react-dom/test-utils';
 
 /*
