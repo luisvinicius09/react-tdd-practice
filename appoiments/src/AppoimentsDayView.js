@@ -5,8 +5,42 @@ const appoimentTimeOfDay = (startsAt) => {
   return `${h}:${m}`;
 };
 
-export const Appoiment = ({ customer: { firstName } }) => (
-  <div>{firstName}</div>
+export const Appoiment = ({
+  startsAt,
+  customer: { firstName, lastName, phoneNumber, stylist, service, notes },
+}) => (
+  <>
+    <div>
+      <h2>The appoiment starts at {startsAt}</h2>
+    </div>
+    <table>
+      <tr>
+        <td>First Name</td>
+        <td>{firstName}</td>
+      </tr>
+      <tr>
+        <td>Last Name</td>
+        <td>{lastName}</td>
+      </tr>
+      <tr>
+        <td>Phone Number</td>
+        <td>{phoneNumber}</td>
+      </tr>
+      <tr>
+        <td>Stylist</td>
+        <td>{stylist}</td>
+      </tr>
+      <tr>
+        <td>Service</td>
+        <td>{service}</td>
+      </tr>
+      <tr>
+        <td>Notes</td>
+        <td>{notes}</td>
+      </tr>
+    </table>
+    <div>{firstName}</div>
+  </>
 );
 
 export const AppoimentsDayView = ({ appoiments }) => {
